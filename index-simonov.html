@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2GIS Map API</title>
+    <meta name="description" content="Basic realty scene config example of glTF plugin" />
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+    <script src="https://unpkg.com/@2gis/mapgl-gltf@^2/dist/bundle.js"></script>
+
+    <div id="container"></div>
+    <script>
+        const map = new mapgl.Map('container', {
+            center: [37.652844,55.711209],
+            zoom: 17.9,
+            key: 'cb3dbcbd-e84d-4719-8f90-6befcb13e958',
+            pitch: 45,
+            rotation: 330,
+            enableTrackResize: true,
+        });
+
+        const plugin = new mapgl.GltfPlugin(map, {
+            modelsLoadStrategy: 'waitAll',
+            //modelsBaseUrl: 'https://disk.2gis.com/digital-twin/models_s3/realty_ads/zgktechnology/',
+            modelsBaseUrl: 'https://keymoments.ru/models/',
+           
+            labelGroupDefaults: {
+                fontSize: 14,
+            },
+            hoverOptions: {
+                color: '#FFF3F3',
+            },
+        });
+
+        plugin.addRealtyScene([
+            {
+                modelId: 'simonov_31f750e88411a7efeec1616761a5415ad19d04d2',
+                coordinates: [37.65090263094253,55.709958271063165],
+                //modelUrl: 'zgktechnology1.glb',
+                modelUrl: 'simonov.glb',
+                interactive: true,
+                rotateX: 0,
+                rotateY: 0,
+                rotateZ: 0,
+                scale:   1.01,
+                floors:
+                [{
+                    id: 'f1',
+                    text: '1',
+                    modelUrl: 'simonov_f1.glb',
+                },
+                {
+                    id: 'f4',
+                    text: '4',
+                    modelUrl: 'simonov_f4.glb', 
+                }],
+                linkedIds: ['4504235303407392'],
+                popupOptions: {
+                    coordinates: [37.65090263094253,55.709958271063165],
+                    title: 'БЦ Симонов Плаза',
+                    description: 'Современный многофункциональный комплекс класса В+',
+                },
+                mapOptions: {
+                    center: [37.652844,55.711209],
+                    pitch: 40,
+                    zoom: 18.2,
+                    rotation: 150,
+                },
+            },
+        ]);
+
+        //plugin.showModel('zgktechnology1_47751f926b1e34b8d54a7f190ad32229e244db18');
+
+    </script>
+</body>
+
+</html>
